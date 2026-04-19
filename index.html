@@ -279,39 +279,104 @@
   .prestations { background: var(--dark); }
 
   .presta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--border);
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--border);
     margin-top: 4rem;
   }
 
   .presta-item {
-    background: var(--dark);
-    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
     transition: background 0.3s;
-    cursor: default;
   }
 
+  .presta-item:last-child { border-bottom: none; }
   .presta-item:hover { background: var(--dark2); }
 
-  .presta-number {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    line-height: 1;
-    margin-bottom: 1rem;
-    color: rgba(232,201,122,0.2);
+  .presta-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.8rem 2rem;
+  }
+
+  .presta-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--accent);
+    opacity: 0.8;
+  }
+
+  .presta-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .presta-name {
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
     color: var(--white);
-    margin-bottom: 0.5rem;
+    flex: 1;
+    transition: color 0.3s;
   }
 
-  .presta-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .presta-item:hover .presta-name { color: var(--accent); }
+
+  .presta-arrow {
+    width: 20px;
+    height: 20px;
+    color: var(--muted);
+    transition: transform 0.3s, color 0.3s;
+    flex-shrink: 0;
+  }
+
+  .presta-arrow svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .presta-item:hover .presta-arrow {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .presta-item.open .presta-arrow {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .presta-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    opacity: 0;
+  }
+
+  .presta-item:hover .presta-body,
+  .presta-item.open .presta-body {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .presta-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding: 0 2rem 1.8rem 5.5rem;
+  }
 
   .references { background: var(--black); }
 
@@ -596,31 +661,72 @@
   <div class="section-label" data-fr="Ce que je fais" data-en="What I do">Ce que je fais</div>
   <h2 class="section-title" data-fr="Prestations" data-en="Services">Prestations</h2>
   <div class="presta-grid">
+
     <div class="presta-item">
-      <div class="presta-number">01</div>
-      <div class="presta-name" data-fr="Pupitre live" data-en="Live operation">Pupitre live</div>
-      <div class="presta-desc" data-fr="Exploitation en live sur Grand MA2 & MA3. Concerts, tournées, événements, spectacles." data-en="Live operation on Grand MA2 & MA3. Concerts, tours, events, shows.">Exploitation en live sur Grand MA2 & MA3. Concerts, tournées, événements, spectacles.</div>
+      <div class="presta-header">
+        <div class="presta-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 20h8M12 18v2"/><circle cx="12" cy="11" r="2"/><path d="M6 8h2M16 8h2M6 14h2M16 14h2"/></svg>
+        </div>
+        <div class="presta-name" data-fr="Pupitre live" data-en="Live operation">Pupitre live</div>
+        <div class="presta-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="presta-body">
+        <div class="presta-desc" data-fr="Exploitation en live sur Grand MA2 & MA3. Concerts, tournées, événements, spectacles." data-en="Live operation on Grand MA2 & MA3. Concerts, tours, events, shows.">Exploitation en live sur Grand MA2 & MA3. Concerts, tournées, événements, spectacles.</div>
+      </div>
     </div>
+
     <div class="presta-item">
-      <div class="presta-number">02</div>
-      <div class="presta-name" data-fr="Programmation & encodage" data-en="Programming & encoding">Programmation & encodage</div>
-      <div class="presta-desc" data-fr="Programmation complète de shows, timecode ou non, prêt à partir en opération." data-en="Full show programming, timecoded or not, ready for live operation.">Programmation complète de shows, timecode ou non, prêt à partir en opération.</div>
+      <div class="presta-header">
+        <div class="presta-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="presta-name" data-fr="Programmation & encodage" data-en="Programming & encoding">Programmation & encodage</div>
+        <div class="presta-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="presta-body">
+        <div class="presta-desc" data-fr="Programmation complète de shows, timecode ou non, prêt à partir en opération." data-en="Full show programming, timecoded or not, ready for live operation.">Programmation complète de shows, timecode ou non, prêt à partir en opération.</div>
+      </div>
     </div>
+
     <div class="presta-item">
-      <div class="presta-number">03</div>
-      <div class="presta-name" data-fr="Création lumière" data-en="Lighting design">Création lumière</div>
-      <div class="presta-desc" data-fr="Conception artistique et technique de l'éclairage pour tournées et événements." data-en="Artistic and technical lighting design for tours and events.">Conception artistique et technique de l'éclairage pour tournées et événements.</div>
+      <div class="presta-header">
+        <div class="presta-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <div class="presta-name" data-fr="Création lumière" data-en="Lighting design">Création lumière</div>
+        <div class="presta-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="presta-body">
+        <div class="presta-desc" data-fr="Conception artistique et technique de l'éclairage pour tournées et événements." data-en="Artistic and technical lighting design for tours and events.">Conception artistique et technique de l'éclairage pour tournées et événements.</div>
+      </div>
     </div>
+
     <div class="presta-item">
-      <div class="presta-number">04</div>
-      <div class="presta-name" data-fr="Préprogrammation 3D" data-en="3D pre-programming">Préprogrammation 3D</div>
-      <div class="presta-desc" data-fr="Préparation complète en studio sur Depence R4 et Wysiwyg avant d'arriver sur site." data-en="Full studio preparation on Depence R4 and Wysiwyg before arriving on site.">Préparation complète en studio sur Depence R4 et Wysiwyg avant d'arriver sur site.</div>
+      <div class="presta-header">
+        <div class="presta-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="presta-name" data-fr="Préprogrammation 3D" data-en="3D pre-programming">Préprogrammation 3D</div>
+        <div class="presta-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="presta-body">
+        <div class="presta-desc" data-fr="Préparation complète en studio sur Depence R4 et Wysiwyg avant d'arriver sur site." data-en="Full studio preparation on Depence R4 and Wysiwyg before arriving on site.">Préparation complète en studio sur Depence R4 et Wysiwyg avant d'arriver sur site.</div>
+      </div>
     </div>
+
     <div class="presta-item">
-      <div class="presta-number">05</div>
-      <div class="presta-name" data-fr="Plans de feu" data-en="Lighting plots">Plans de feu</div>
-      <div class="presta-desc" data-fr="Réalisation de plans techniques et fiches sur Wysiwyg pour toute production." data-en="Technical lighting plots and documentation on Wysiwyg for any production.">Réalisation de plans techniques et fiches sur Wysiwyg pour toute production.</div>
+      <div class="presta-header">
+        <div class="presta-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="presta-name" data-fr="Plans de feu" data-en="Lighting plots">Plans de feu</div>
+        <div class="presta-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="presta-body">
+        <div class="presta-desc" data-fr="Réalisation de plans techniques et fiches sur Wysiwyg pour toute production." data-en="Technical lighting plots and documentation on Wysiwyg for any production.">Réalisation de plans techniques et fiches sur Wysiwyg pour toute production.</div>
+      </div>
     </div>
+
   </div>
 </section>
 
