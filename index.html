@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -82,7 +81,6 @@
 
   .nav-links a:hover { color: var(--white); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -190,7 +188,6 @@
     animation: fadeUp 0.8s 1.2s forwards;
   }
 
-  /* SECTIONS */
   section { padding: 8rem 4rem; }
 
   .section-label {
@@ -210,7 +207,6 @@
     margin-bottom: 3rem;
   }
 
-  /* PRESTATIONS */
   .prestations { background: var(--dark); }
 
   .presta-grid {
@@ -234,7 +230,6 @@
   .presta-number {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
-    color: var(--accent-dim);
     line-height: 1;
     margin-bottom: 1rem;
     color: rgba(232,201,122,0.2);
@@ -253,7 +248,6 @@
     line-height: 1.6;
   }
 
-  /* RÉFÉRENCES */
   .references { background: var(--black); }
 
   .ref-intro {
@@ -263,10 +257,7 @@
     margin-bottom: 5rem;
   }
 
-  .ref-featured {
-    border-top: 1px solid var(--border);
-    margin-bottom: 1px;
-  }
+  .ref-featured { border-top: 1px solid var(--border); }
 
   .ref-item {
     display: grid;
@@ -277,25 +268,10 @@
     gap: 2rem;
     transition: padding 0.3s;
     position: relative;
+    cursor: default;
   }
 
   .ref-item:hover { padding-left: 1rem; }
-
-  .ref-hover-img {
-    position: fixed;
-    width: 320px;
-    height: 200px;
-    object-fit: cover;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 1000;
-    border: 1px solid var(--border);
-    top: 0;
-    left: 0;
-  }
-
-  .ref-item:hover .ref-hover-img { opacity: 1; }
 
   .ref-client {
     font-family: 'Bebas Neue', sans-serif;
@@ -333,7 +309,6 @@
     vertical-align: middle;
   }
 
-  /* ÉQUIPEMENT */
   .equipement { background: var(--dark); }
 
   .equip-grid {
@@ -368,7 +343,6 @@
     margin-top: 0.3rem;
   }
 
-  /* CONTACT */
   .contact { background: var(--black); }
 
   .contact-inner {
@@ -430,14 +404,8 @@
     width: 100%;
   }
 
-  form input:focus, form textarea:focus {
-    border-color: rgba(232,201,122,0.4);
-  }
-
-  form input::placeholder, form textarea::placeholder {
-    color: var(--muted);
-  }
-
+  form input:focus, form textarea:focus { border-color: rgba(232,201,122,0.4); }
+  form input::placeholder, form textarea::placeholder { color: var(--muted); }
   form textarea { min-height: 120px; resize: vertical; }
 
   form button {
@@ -454,12 +422,8 @@
     align-self: flex-start;
   }
 
-  form button:hover {
-    background: var(--accent);
-    color: var(--black);
-  }
+  form button:hover { background: var(--accent); color: var(--black); }
 
-  /* FOOTER */
   footer {
     padding: 2rem 4rem;
     border-top: 1px solid var(--border);
@@ -470,7 +434,6 @@
     color: var(--muted);
   }
 
-  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -481,7 +444,6 @@
     50% { opacity: 0.4; }
   }
 
-  /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -506,7 +468,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-line"></div>
@@ -519,7 +480,6 @@
   <div class="scroll-hint">Défiler</div>
 </section>
 
-<!-- PRESTATIONS -->
 <section class="prestations" id="prestations">
   <div class="section-label">Ce que je fais</div>
   <h2 class="section-title">Prestations</h2>
@@ -552,52 +512,64 @@
   </div>
 </section>
 
-<!-- RÉFÉRENCES -->
 <section class="references" id="references">
   <div class="section-label">Parcours & projets</div>
   <h2 class="section-title">Références</h2>
   <p class="ref-intro">Sept ans chez Disneyland Paris, de technicien à responsable des programmations. Depuis 2023, des projets variés en France et en Europe.</p>
 
   <div class="ref-featured">
-    <div class="ref-item">
+
+    <div class="ref-item" data-img="collectif2026.jpg">
       <div>
-        <div class="ref-client">Disneyland Paris <span class="ref-tag">7 ans</span></div>
-        <div class="ref-detail">Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland ...</div>
-      </div>
-      <div class="ref-year">2016 – 2023</div>
-    </div>
-    <div class="ref-item" data-img="jo.jpg">
-      <div>
-        <div class="ref-client">Cérémonie de clôture Paris 2024 <span class="ref-tag">JO 2024</span></div>
-        <div class="ref-detail">Réseau lumière Madmapper · Stade de France  </div>
-      </div>
-      <div class="ref-year">2024</div>
-    </div>
-    <div class="ref-item">
-      <div>
-        <div class="ref-client">Joe Dwét Filé</div>
-        <div class="ref-detail">Programmation et opération · Accor Arena · Paris</div>
-      </div>
-      <div class="ref-year">2023</div>
-    </div>
-    <div class="ref-item">
-      <div>
-        <div class="ref-client">Collectif Métissé - LIVE TOUR 2025 <span class="ref-tag">En cours</span></div>
+        <div class="ref-client">Collectif Métissé — Live Tour 2026 <span class="ref-tag">En cours</span></div>
         <div class="ref-detail">Création lumière & opération · Tournée France</div>
       </div>
-      <div class="ref-year">2025 –</div>
+      <div class="ref-year">2026 –</div>
     </div>
-    <div class="ref-item">
+
+    <div class="ref-item" data-img="gipsy.jpg">
       <div>
         <div class="ref-client">Gipsy Kings by Diego Baliardo <span class="ref-tag">En cours</span></div>
         <div class="ref-detail">Création lumière et opération · Tournée Europe</div>
       </div>
       <div class="ref-year">2026 –</div>
     </div>
+
+    <div class="ref-item" data-img="collectif2025.jpg">
+      <div>
+        <div class="ref-client">Collectif Métissé — Live Tour 2025</div>
+        <div class="ref-detail">Création lumière & opération · Tournée France</div>
+      </div>
+      <div class="ref-year">2025</div>
+    </div>
+
+    <div class="ref-item" data-img="jo.jpg">
+      <div>
+        <div class="ref-client">Cérémonie de clôture Paris 2024 <span class="ref-tag">JO 2024</span></div>
+        <div class="ref-detail">Réseau lumière Madmapper · Stade de France</div>
+      </div>
+      <div class="ref-year">2024</div>
+    </div>
+
+    <div class="ref-item" data-img="accor.jpg">
+      <div>
+        <div class="ref-client">Joe Dwét Filé</div>
+        <div class="ref-detail">Programmation et opération · Accor Arena · Paris</div>
+      </div>
+      <div class="ref-year">2023</div>
+    </div>
+
+    <div class="ref-item" data-img="disney.jpg">
+      <div>
+        <div class="ref-client">Disneyland Paris <span class="ref-tag">7 ans</span></div>
+        <div class="ref-detail">Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland</div>
+      </div>
+      <div class="ref-year">2016 – 2023</div>
+    </div>
+
   </div>
 </section>
 
-<!-- ÉQUIPEMENT -->
 <section class="equipement" id="equipement">
   <div class="section-label">Matériel</div>
   <h2 class="section-title">Équipement</h2>
@@ -617,7 +589,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="section-label">Disponible</div>
   <h2 class="section-title">Contact</h2>
@@ -638,7 +609,7 @@
 </section>
 
 <footer>
-  <span>© 2025 Jour And Light · Cyril Jourdaine</span>
+  <span>© 2026 Jour And Light · Cyril Jourdaine</span>
   <span>Bordeaux · France · Europe</span>
 </footer>
 
@@ -649,35 +620,18 @@ const floatingImg = document.getElementById('floating-img');
 
 document.querySelectorAll('.ref-item[data-img]').forEach(item => {
   const imgSrc = item.getAttribute('data-img');
-  
   item.addEventListener('mouseenter', () => {
     floatingImg.src = imgSrc;
     floatingImg.style.opacity = '1';
   });
-  
   item.addEventListener('mouseleave', () => {
     floatingImg.style.opacity = '0';
   });
-  
   item.addEventListener('mousemove', (e) => {
     floatingImg.style.left = (e.clientX + 20) + 'px';
     floatingImg.style.top = (e.clientY - 220) + 'px';
   });
 });
-
-function handleSubmit(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.textContent = 'Message envoyé ✓';
-  btn.style.background = 'var(--accent)';
-  btn.style.color = 'var(--black)';
-  setTimeout(() => {
-    btn.textContent = 'Envoyer →';
-    btn.style.background = '';
-    btn.style.color = '';
-    e.target.reset();
-  }, 3000);
-}
 </script>
 </body>
 </html>
