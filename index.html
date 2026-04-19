@@ -566,13 +566,12 @@
       </div>
       <div class="ref-year">2016 – 2023</div>
     </div>
-    <div class="ref-item">
+    <div class="ref-item" data-img="jo.jpg">
       <div>
         <div class="ref-client">Jeux Olympiques de Paris <span class="ref-tag">JO 2024</span></div>
         <div class="ref-detail">Réseau lumière Madmapper · Cérémonie de clôture</div>
       </div>
       <div class="ref-year">2024</div>
-      <img class="ref-hover-img" src="jo.jpg" alt="JO Paris 2024" id="jo-img">
     </div>
     <div class="ref-item">
       <div>
@@ -643,11 +642,26 @@
   <span>Bordeaux · France · Europe</span>
 </footer>
 
+<img id="floating-img" src="" alt="" style="position:fixed;width:320px;height:200px;object-fit:cover;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:9999;border:1px solid rgba(255,255,255,0.1);top:0;left:0;">
+
 <script>
-document.querySelectorAll('.ref-hover-img').forEach(img => {
-  const item = img.closest('.ref-item');
+const floatingImg = document.getElementById('floating-img');
+
+document.querySelectorAll('.ref-item[data-img]').forEach(item => {
+  const imgSrc = item.getAttribute('data-img');
+  
+  item.addEventListener('mouseenter', () => {
+    floatingImg.src = imgSrc;
+    floatingImg.style.opacity = '1';
+  });
+  
+  item.addEventListener('mouseleave', () => {
+    floatingImg.style.opacity = '0';
+  });
+  
   item.addEventListener('mousemove', (e) => {
-    img.style.transform = `translate(${e.clientX + 20}px, ${e.clientY - 220}px)`;
+    floatingImg.style.left = (e.clientX + 20) + 'px';
+    floatingImg.style.top = (e.clientY - 220) + 'px';
   });
 });
 
