@@ -276,9 +276,25 @@
     border-bottom: 1px solid var(--border);
     gap: 2rem;
     transition: padding 0.3s;
+    position: relative;
   }
 
   .ref-item:hover { padding-left: 1rem; }
+
+  .ref-hover-img {
+    position: fixed;
+    width: 320px;
+    height: 200px;
+    object-fit: cover;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+    border: 1px solid var(--border);
+    transform: translate(-50%, -120%);
+  }
+
+  .ref-item:hover .ref-hover-img { opacity: 1; }
 
   .ref-client {
     font-family: 'Bebas Neue', sans-serif;
@@ -555,6 +571,7 @@
         <div class="ref-detail">Réseau lumière Madmapper · Cérémonie de clôture</div>
       </div>
       <div class="ref-year">2024</div>
+      <img class="ref-hover-img" src="jo.jpg" alt="JO Paris 2024" id="jo-img">
     </div>
     <div class="ref-item">
       <div>
@@ -626,6 +643,14 @@
 </footer>
 
 <script>
+document.querySelectorAll('.ref-hover-img').forEach(img => {
+  const item = img.closest('.ref-item');
+  item.addEventListener('mousemove', (e) => {
+    img.style.left = e.clientX + 'px';
+    img.style.top = e.clientY + 'px';
+  });
+});
+
 function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('button');
