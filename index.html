@@ -322,16 +322,54 @@
   .ref-item {
     display: grid;
     grid-template-columns: 1fr auto;
-    align-items: center;
-    padding: 2rem 0;
+    align-items: start;
+    padding: 2rem 0 0;
     border-bottom: 1px solid var(--border);
-    gap: 2rem;
-    transition: padding 0.3s;
+    gap: 0;
     position: relative;
     cursor: default;
+    transition: padding 0.3s;
   }
 
   .ref-item:hover { padding-left: 1rem; }
+
+  .ref-item-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    grid-column: 1 / -1;
+  }
+
+  .ref-photos {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s, margin-bottom 0.5s;
+    opacity: 0;
+    margin-bottom: 0;
+  }
+
+  .ref-item:hover .ref-photos {
+    max-height: 200px;
+    opacity: 1;
+    margin-bottom: 2rem;
+  }
+
+  .ref-photos img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85);
+    transition: filter 0.3s;
+  }
+
+  .ref-photos img:hover { filter: brightness(1); }
 
   .ref-client {
     font-family: 'Bebas Neue', sans-serif;
@@ -592,52 +630,100 @@
   <p class="ref-intro" data-fr="Sept ans chez Disneyland Paris, de technicien à responsable des programmations. Depuis 2023, des projets variés en France et en Europe." data-en="Seven years at Disneyland Paris, from technician to head of lighting programming. Since 2023, varied projects across France and Europe.">Sept ans chez Disneyland Paris, de technicien à responsable des programmations. Depuis 2023, des projets variés en France et en Europe.</p>
 
   <div class="ref-featured">
-    <div class="ref-item" data-imgs="collectif2026_1.jpg,collectif2026_2.jpg,collectif2026_3.jpg,collectif2026_4.jpg">
-      <div>
-        <div class="ref-client">Collectif Métissé — Live Tour 2026 <span class="ref-tag" data-fr="En cours" data-en="Ongoing">En cours</span></div>
-        <div class="ref-detail" data-fr="Création lumière & opération · Tournée France" data-en="Lighting design & operation · France Tour">Création lumière & opération · Tournée France</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client">Collectif Métissé — Live Tour 2026 <span class="ref-tag" data-fr="En cours" data-en="Ongoing">En cours</span></div>
+          <div class="ref-detail" data-fr="Création lumière & opération · Tournée France" data-en="Lighting design & operation · France Tour">Création lumière & opération · Tournée France</div>
+        </div>
+        <div class="ref-year">2026 –</div>
       </div>
-      <div class="ref-year">2026 –</div>
+      <div class="ref-photos">
+        <img src="collectif2026_1.jpg" alt="">
+        <img src="collectif2026_2.jpg" alt="">
+        <img src="collectif2026_3.jpg" alt="">
+        <img src="collectif2026_4.jpg" alt="">
+      </div>
     </div>
 
-    <div class="ref-item" data-imgs="gipsy_1.jpg,gipsy_2.jpg,gipsy_3.jpg,gipsy_4.jpg">
-      <div>
-        <div class="ref-client">Gipsy Kings by Diego Baliardo <span class="ref-tag" data-fr="En cours" data-en="Ongoing">En cours</span></div>
-        <div class="ref-detail" data-fr="Création lumière et opération · Tournée Europe" data-en="Lighting design & operation · Europe Tour">Création lumière et opération · Tournée Europe</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client">Gipsy Kings by Diego Baliardo <span class="ref-tag" data-fr="En cours" data-en="Ongoing">En cours</span></div>
+          <div class="ref-detail" data-fr="Création lumière et opération · Tournée Europe" data-en="Lighting design & operation · Europe Tour">Création lumière et opération · Tournée Europe</div>
+        </div>
+        <div class="ref-year">2026 –</div>
       </div>
-      <div class="ref-year">2026 –</div>
+      <div class="ref-photos">
+        <img src="gipsy_1.jpg" alt="">
+        <img src="gipsy_2.jpg" alt="">
+        <img src="gipsy_3.jpg" alt="">
+        <img src="gipsy_4.jpg" alt="">
+      </div>
     </div>
 
-    <div class="ref-item" data-imgs="collectif2025_1.jpg,collectif2025_2.jpg,collectif2025_3.jpg,collectif2025_4.jpg">
-      <div>
-        <div class="ref-client">Collectif Métissé — Live Tour 2025</div>
-        <div class="ref-detail" data-fr="Création lumière & opération · Tournée France" data-en="Lighting design & operation · France Tour">Création lumière & opération · Tournée France</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client">Collectif Métissé — Live Tour 2025</div>
+          <div class="ref-detail" data-fr="Création lumière & opération · Tournée France" data-en="Lighting design & operation · France Tour">Création lumière & opération · Tournée France</div>
+        </div>
+        <div class="ref-year">2025</div>
       </div>
-      <div class="ref-year">2025</div>
+      <div class="ref-photos">
+        <img src="collectif2025_1.jpg" alt="">
+        <img src="collectif2025_2.jpg" alt="">
+        <img src="collectif2025_3.jpg" alt="">
+        <img src="collectif2025_4.jpg" alt="">
+      </div>
     </div>
 
-    <div class="ref-item" data-imgs="jo_1.jpg,jo_2.jpg,jo_3.jpg,jo_4.jpg">
-      <div>
-        <div class="ref-client" data-fr="Cérémonie de clôture Paris 2024" data-en="Paris 2024 Closing Ceremony">Cérémonie de clôture Paris 2024 <span class="ref-tag">JO 2024</span></div>
-        <div class="ref-detail" data-fr="Réseau lumière Madmapper · Stade de France" data-en="Madmapper lighting network · Stade de France">Réseau lumière Madmapper · Stade de France</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client" data-fr="Cérémonie de clôture Paris 2024" data-en="Paris 2024 Closing Ceremony">Cérémonie de clôture Paris 2024 <span class="ref-tag">JO 2024</span></div>
+          <div class="ref-detail" data-fr="Réseau lumière Madmapper · Stade de France" data-en="Madmapper lighting network · Stade de France">Réseau lumière Madmapper · Stade de France</div>
+        </div>
+        <div class="ref-year">2024</div>
       </div>
-      <div class="ref-year">2024</div>
+      <div class="ref-photos">
+        <img src="jo_1.jpg" alt="">
+        <img src="jo_2.jpg" alt="">
+        <img src="jo_3.jpg" alt="">
+        <img src="jo_4.jpg" alt="">
+      </div>
     </div>
 
-    <div class="ref-item" data-imgs="accor_1.jpg,accor_2.jpg,accor_3.jpg,accor_4.jpg">
-      <div>
-        <div class="ref-client">Joe Dwét Filé</div>
-        <div class="ref-detail" data-fr="Programmation et opération · Accor Arena · Paris" data-en="Programming & operation · Accor Arena · Paris">Programmation et opération · Accor Arena · Paris</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client">Joe Dwét Filé</div>
+          <div class="ref-detail" data-fr="Programmation et opération · Accor Arena · Paris" data-en="Programming & operation · Accor Arena · Paris">Programmation et opération · Accor Arena · Paris</div>
+        </div>
+        <div class="ref-year">2023</div>
       </div>
-      <div class="ref-year">2023</div>
+      <div class="ref-photos">
+        <img src="accor_1.jpg" alt="">
+        <img src="accor_2.jpg" alt="">
+        <img src="accor_3.jpg" alt="">
+        <img src="accor_4.jpg" alt="">
+      </div>
     </div>
 
-    <div class="ref-item" data-imgs="disney_1.jpg,disney_2.jpg,disney_3.jpg,disney_4.jpg">
-      <div>
-        <div class="ref-client">Disneyland Paris <span class="ref-tag" data-fr="7 ans" data-en="7 years">7 ans</span></div>
-        <div class="ref-detail" data-fr="Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland" data-en="Technician · Lighting manager · Head of programming · Grand MA2 trainer — Castle, Tower of Terror, Mickey and the Magician, Christmas Parade, Electroland">Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland</div>
+    <div class="ref-item">
+      <div class="ref-item-header">
+        <div>
+          <div class="ref-client">Disneyland Paris <span class="ref-tag" data-fr="7 ans" data-en="7 years">7 ans</span></div>
+          <div class="ref-detail" data-fr="Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland" data-en="Technician · Lighting manager · Head of programming · Grand MA2 trainer — Castle, Tower of Terror, Mickey and the Magician, Christmas Parade, Electroland">Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland</div>
+        </div>
+        <div class="ref-year">2016 – 2023</div>
       </div>
-      <div class="ref-year">2016 – 2023</div>
+      <div class="ref-photos">
+        <img src="disney_1.jpg" alt="">
+        <img src="disney_2.jpg" alt="">
+        <img src="disney_3.jpg" alt="">
+        <img src="disney_4.jpg" alt="">
+      </div>
     </div>
   </div>
 </section>
@@ -703,8 +789,6 @@
   <span>Bordeaux · France · Europe</span>
 </footer>
 
-<img id="floating-img" src="" alt="" style="position:fixed;width:320px;height:200px;object-fit:cover;pointer-events:none;opacity:0;transition:opacity 0.15s, transform 0.15s;z-index:9999;border:1px solid rgba(255,255,255,0.1);top:0;left:0;transform:scale(1);">
-
 <script>
 let currentLang = 'fr';
 
@@ -713,65 +797,14 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
   document.documentElement.lang = lang;
-
   document.querySelectorAll('[data-fr][data-en]').forEach(el => {
     if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
     el.textContent = el.getAttribute(`data-${lang}`);
   });
-
   document.querySelectorAll('[data-fr-placeholder][data-en-placeholder]').forEach(el => {
     el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
   });
-
-  const heroTag = document.querySelector('.ref-client[data-fr]');
 }
-
-const floatingImg = document.getElementById('floating-img');
-let currentImgs = [];
-let currentIndex = -1;
-
-function changeImage(imgs, idx) {
-  if (idx === currentIndex) return;
-  currentIndex = idx;
-  floatingImg.style.opacity = '0';
-  floatingImg.style.transform = 'scale(0.92)';
-  setTimeout(() => {
-    floatingImg.src = imgs[idx];
-    floatingImg.style.opacity = '1';
-    floatingImg.style.transform = 'scale(1)';
-  }, 120);
-}
-
-document.querySelectorAll('.ref-item[data-imgs]').forEach(item => {
-  const imgs = item.getAttribute('data-imgs').split(',').map(s => s.trim()).filter(Boolean);
-
-  item.addEventListener('mouseenter', (e) => {
-    currentImgs = imgs;
-    currentIndex = -1;
-    const rect = item.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    const idx = Math.min(Math.floor(ratio * imgs.length), imgs.length - 1);
-    floatingImg.src = imgs[idx];
-    floatingImg.style.opacity = '1';
-    floatingImg.style.transform = 'scale(1)';
-    currentIndex = idx;
-  });
-
-  item.addEventListener('mouseleave', () => {
-    floatingImg.style.opacity = '0';
-    floatingImg.style.transform = 'scale(0.95)';
-    currentIndex = -1;
-  });
-
-  item.addEventListener('mousemove', (e) => {
-    floatingImg.style.left = (e.clientX + 20) + 'px';
-    floatingImg.style.top = (e.clientY - 220) + 'px';
-    const rect = item.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    const idx = Math.min(Math.floor(ratio * imgs.length), imgs.length - 1);
-    changeImage(imgs, idx);
-  });
-});
 </script>
 </body>
 </html>
