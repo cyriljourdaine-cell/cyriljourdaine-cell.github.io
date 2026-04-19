@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jour And Light · Cyril Jourdaine · Pupitreur Grand MA2 & MA3</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #080808;
+    --dark: #111111;
+    --dark2: #1a1a1a;
+    --accent: #e8c97a;
+    --accent-dim: rgba(232, 201, 122, 0.15);
+    --white: #f5f5f0;
+    --muted: #888880;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    filter: brightness(2);
+  }
+
+  .nav-logo span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('hero.jpg');
+    background-size: cover;
+    background-position: center 30%;
+    z-index: 0;
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,0.75) 40%, rgba(8,8,8,0.45) 70%, rgba(8,8,8,0.3) 100%),
+      linear-gradient(to right, rgba(8,8,8,0.6) 0%, transparent 60%);
+  }
+
+  .hero-grid { display: none; }
+
+  .hero-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 58%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(232,201,122,0.2) 30%, rgba(232,201,122,0.2) 70%, transparent);
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(232,201,122,0.3);
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-subtitle {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta:hover {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 4rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  /* SECTIONS */
+  section { padding: 8rem 4rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 3rem;
+  }
+
+  /* PRESTATIONS */
+  .prestations { background: var(--dark); }
+
+  .presta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 4rem;
+  }
+
+  .presta-item {
+    background: var(--dark);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .presta-item:hover { background: var(--dark2); }
+
+  .presta-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent-dim);
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: rgba(232,201,122,0.2);
+  }
+
+  .presta-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .presta-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* RÉFÉRENCES */
+  .references { background: var(--black); }
+
+  .ref-intro {
+    max-width: 500px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 5rem;
+  }
+
+  .ref-featured {
+    border-top: 1px solid var(--border);
+    margin-bottom: 1px;
+  }
+
+  .ref-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    gap: 2rem;
+    transition: padding 0.3s;
+  }
+
+  .ref-item:hover { padding-left: 1rem; }
+
+  .ref-client {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: 0.03em;
+    color: var(--white);
+    transition: color 0.3s;
+  }
+
+  .ref-item:hover .ref-client { color: var(--accent); }
+
+  .ref-detail {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.03em;
+  }
+
+  .ref-year {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .ref-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    margin-left: 1rem;
+    vertical-align: middle;
+  }
+
+  /* ÉQUIPEMENT */
+  .equipement { background: var(--dark); }
+
+  .equip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .equip-item {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .equip-item:hover {
+    border-color: rgba(232,201,122,0.3);
+    background: var(--accent-dim);
+  }
+
+  .equip-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+
+  .equip-desc {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--black); }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-text {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .contact-email {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 2rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s;
+  }
+
+  .contact-email:hover { opacity: 0.7; }
+
+  .contact-dispo {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .contact-dispo span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    animation: pulse 2s infinite;
+  }
+
+  form { display: flex; flex-direction: column; gap: 1rem; }
+
+  form input, form textarea {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 1rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+
+  form input:focus, form textarea:focus {
+    border-color: rgba(232,201,122,0.4);
+  }
+
+  form input::placeholder, form textarea::placeholder {
+    color: var(--muted);
+  }
+
+  form textarea { min-height: 120px; resize: vertical; }
+
+  form button {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    align-self: flex-start;
+  }
+
+  form button:hover {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero-line { display: none; }
+    .scroll-hint { display: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="Jour And Light logo"><span>Jour And Light</span></a>
+  <ul class="nav-links">
+    <li><a href="#prestations">Prestations</a></li>
+    <li><a href="#references">Références</a></li>
+    <li><a href="#equipement">Équipement</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Pupitreur · Créateur lumière · Freelance</div>
+    <h1 class="hero-name">Cyril<br><span>Jourdaine</span></h1>
+    <p class="hero-subtitle">Grand MA2 & MA3 · Bordeaux · France · Europe</p>
+    <a href="#contact" class="hero-cta">Me contacter</a>
+  </div>
+  <div class="scroll-hint">Défiler</div>
+</section>
+
+<!-- PRESTATIONS -->
+<section class="prestations" id="prestations">
+  <div class="section-label">Ce que je fais</div>
+  <h2 class="section-title">Prestations</h2>
+  <div class="presta-grid">
+    <div class="presta-item">
+      <div class="presta-number">01</div>
+      <div class="presta-name">Pupitre live</div>
+      <div class="presta-desc">Exploitation en live sur Grand MA2 & MA3. Concerts, tournées, événements, spectacles.</div>
+    </div>
+    <div class="presta-item">
+      <div class="presta-number">02</div>
+      <div class="presta-name">Programmation & encodage</div>
+      <div class="presta-desc">Programmation complète de shows, timecode ou non, prêt à partir en opération.</div>
+    </div>
+    <div class="presta-item">
+      <div class="presta-number">03</div>
+      <div class="presta-name">Création lumière</div>
+      <div class="presta-desc">Conception artistique et technique de l'éclairage pour tournées et événements.</div>
+    </div>
+    <div class="presta-item">
+      <div class="presta-number">04</div>
+      <div class="presta-name">Préprogrammation 3D</div>
+      <div class="presta-desc">Préparation complète en studio sur Depence R4 et Wysiwyg avant d'arriver sur site.</div>
+    </div>
+    <div class="presta-item">
+      <div class="presta-number">05</div>
+      <div class="presta-name">Plans de feu</div>
+      <div class="presta-desc">Réalisation de plans techniques et fiches sur Wysiwyg pour toute production.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RÉFÉRENCES -->
+<section class="references" id="references">
+  <div class="section-label">Parcours & projets</div>
+  <h2 class="section-title">Références</h2>
+  <p class="ref-intro">Sept ans chez Disneyland Paris, de technicien à responsable des programmations. Depuis 2023, des projets variés en France et en Europe.</p>
+
+  <div class="ref-featured">
+    <div class="ref-item">
+      <div>
+        <div class="ref-client">Disneyland Paris <span class="ref-tag">7 ans</span></div>
+        <div class="ref-detail">Technicien · Régisseur · Responsable programmations · Formateur Grand MA2 — Château, Tour de la Terreur, Mickey et le Magicien, Parade Étincelante de Noël, Electroland</div>
+      </div>
+      <div class="ref-year">2016 – 2023</div>
+    </div>
+    <div class="ref-item">
+      <div>
+        <div class="ref-client">Jeux Olympiques de Paris <span class="ref-tag">JO 2024</span></div>
+        <div class="ref-detail">Réseau lumière Madmapper · Cérémonie de clôture</div>
+      </div>
+      <div class="ref-year">2024</div>
+    </div>
+    <div class="ref-item">
+      <div>
+        <div class="ref-client">Accor Arena</div>
+        <div class="ref-detail">Concert Joe Dwét Filé · Paris</div>
+      </div>
+      <div class="ref-year">2023</div>
+    </div>
+    <div class="ref-item">
+      <div>
+        <div class="ref-client">Collectif Métissé <span class="ref-tag">En cours</span></div>
+        <div class="ref-detail">Création lumière & pupitre · Tournée France</div>
+      </div>
+      <div class="ref-year">2024 –</div>
+    </div>
+    <div class="ref-item">
+      <div>
+        <div class="ref-client">Gipsy Kings by Diego Baliardo <span class="ref-tag">En cours</span></div>
+        <div class="ref-detail">Pupitre live · Tournée Europe</div>
+      </div>
+      <div class="ref-year">2024 –</div>
+    </div>
+  </div>
+</section>
+
+<!-- ÉQUIPEMENT -->
+<section class="equipement" id="equipement">
+  <div class="section-label">Matériel</div>
+  <h2 class="section-title">Équipement</h2>
+  <div class="equip-grid">
+    <div class="equip-item">
+      <div class="equip-name">Grand MA3</div>
+      <div class="equip-desc">Console lumière</div>
+    </div>
+    <div class="equip-item">
+      <div class="equip-name">Depence R4</div>
+      <div class="equip-desc">Visualisation 3D</div>
+    </div>
+    <div class="equip-item">
+      <div class="equip-name">Wysiwyg</div>
+      <div class="equip-desc">Plans de feu & 3D</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label">Disponible</div>
+  <h2 class="section-title">Contact</h2>
+  <div class="contact-inner">
+    <div>
+      <p class="contact-text">Disponible sur toute la France et en Europe pour des projets de tournées, concerts, événements et shows.</p>
+      <a href="mailto:cyril.jourdaine@jourandlight.fr" class="contact-email">cyril.jourdaine@jourandlight.fr</a>
+      <p class="contact-dispo"><span></span>Disponible pour de nouveaux projets</p>
+    </div>
+    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact" />
+      <p style="display:none;"><input name="bot-field" /></p>
+      <input type="text" name="nom" placeholder="Votre nom" required />
+      <input type="email" name="email" placeholder="Votre email" required />
+      <input type="text" name="projet" placeholder="Projet / production" />
+      <textarea name="message" placeholder="Décrivez votre projet..."></textarea>
+      <button type="submit">Envoyer →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Jour And Light · Cyril Jourdaine</span>
+  <span>Bordeaux · France · Europe</span>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = 'Message envoyé ✓';
+  btn.style.background = 'var(--accent)';
+  btn.style.color = 'var(--black)';
+  setTimeout(() => {
+    btn.textContent = 'Envoyer →';
+    btn.style.background = '';
+    btn.style.color = '';
+    e.target.reset();
+  }, 3000);
+}
+</script>
+</body>
+</html>
